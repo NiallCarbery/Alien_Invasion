@@ -6,7 +6,7 @@ class Ship:
         """Initlaize ship and position"""
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
-        self.settinfs = ai_game.settings
+        self.settings = ai_game.settings
 
         #Load ship and rect
         self.image = pygame.image.load('images/ship.bmp')
@@ -24,11 +24,11 @@ class Ship:
     
     def update(self):
         """Update the ships position based on the movement flags"""
-        #Ipdate ships x value
-        if self.moving_right:
+        #Update ships x value
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
-        if self.moving_left:
-            self.x -= self.settigs.ship_speed
+        if self.moving_left and self.rect.left > 0:
+            self.x -= self.settings.ship_speed
 
         #Update the rect position based on x
         self.rect.x = self.x
