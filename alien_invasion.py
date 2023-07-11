@@ -13,7 +13,7 @@ from alien import Alien
 
 
 class AlienInvasion:
-    """Overall class to manage game assets and behavior."""
+    """Class to manage game assets and behavior."""
 
     def __init__(self):
         """Initialize the game, and create game resources."""
@@ -25,8 +25,7 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
-        # Create an instance to store game statistics,
-        #   and create a scoreboard.
+        # Create game statistics and scoreboard.
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
 
@@ -68,10 +67,10 @@ class AlienInvasion:
         """Start a new game when the player clicks Play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
-            # Reset the game settings.
+            # Reset game settings.
             self.settings.initialize_dynamic_settings()
 
-            # Reset the game statistics.
+            # Reset game statistics.
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
@@ -108,7 +107,7 @@ class AlienInvasion:
             self.ship.moving_left = False
 
     def _fire_bullet(self):
-        """Create a new bullet and add it to the bullets group."""
+        """Create a new bullet and add to bullets group."""
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
@@ -118,7 +117,7 @@ class AlienInvasion:
         # Update bullet positions.
         self.bullets.update()
 
-        # Get rid of bullets that have disappeared.
+        # Get rid of disappeared bullets.
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                  self.bullets.remove(bullet)
