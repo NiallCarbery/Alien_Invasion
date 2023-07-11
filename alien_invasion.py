@@ -103,8 +103,6 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet
             self.bullets.empty()
             self._create_fleet()
-        
-
 
     def _create_fleet(self):
         """Create the fleet of aliens"""
@@ -156,6 +154,10 @@ class AlienInvasion:
         """
         self._check_fleet_edges()
         self.aliens.update()
+
+        #Look for alien-ship collisions
+        if pygame.sprite.spritecollideany(self.ships, self.aliens):
+            print("Ship hit!!!")
 
 if __name__ == '__main__':
     # Make a game instance, and run the game.
