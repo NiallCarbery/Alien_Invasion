@@ -86,6 +86,10 @@ class AlienInvasion:
         """Update position of bullets and get rid of old bullets"""
         self.bullets.update()
 
+        # Check for bullets have hit then remove both
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True)
+
         # Get rid of bullets that have disappeared
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
