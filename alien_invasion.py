@@ -8,6 +8,7 @@ from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from button import Button
 
 
 class AlienInvasion:
@@ -32,6 +33,9 @@ class AlienInvasion:
 
         self._create_fleet()
 
+        # Make the play button
+        self.play_button = Button(self, "Play")
+
         # Start Alien Invasion in an active state.
         self.game_active = True
 
@@ -46,7 +50,7 @@ class AlienInvasion:
                 self._update_aliens()
 
             self._update_screen()
-            self.clock.tick(60)
+            self.clock.tick(120)
 
     def _check_events(self):
         """Respond to keypresses and mouse events."""
@@ -94,7 +98,6 @@ class AlienInvasion:
 
         self._check_bullet_alien_collisions()
         
-
     def _check_bullet_alien_collisions(self):
         """Respond to bullet-alien collisions."""
         # Remove any bullets and aliens that have collided.
@@ -191,6 +194,10 @@ class AlienInvasion:
             bullet.draw_bullet()
         self.ship.blitme()
         self.aliens.draw(self.screen)
+
+        # Draw play button when game is inactive
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         pygame.display.flip()
 
